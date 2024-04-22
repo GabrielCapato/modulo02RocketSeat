@@ -1,5 +1,5 @@
 import { ThemeProvider } from "styled-components";
-import { Groups } from "./src/screens/Groups";
+import { NewGroup } from "./src/screens/NewGroup";
 import theme from "./src/theme";
 import { useFonts,Roboto_400Regular,Roboto_700Bold } from  '@expo-google-fonts/roboto'
 import { ActivityIndicator, StatusBar } from "react-native";
@@ -21,7 +21,7 @@ export default function App() {
         translucent
         backgroundColor='transparent'
       />
-    {fontsLoaded ? <Groups/> : <Loading/> }
+    {fontsLoaded ? <NewGroup/> : <Loading/> }
     </ThemeProvider>
   )
   

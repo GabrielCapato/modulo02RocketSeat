@@ -13,7 +13,6 @@ export function Header({ showBackButton = false}:Props) {
   const navigation = useNavigation();
 
   function handleGoBack(){
-    console.log('Salve')
     navigation.navigate('groups');
   }
   return (

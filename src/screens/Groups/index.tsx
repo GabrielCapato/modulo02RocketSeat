@@ -10,9 +10,12 @@ import { ListEmpty } from '../../components/ListEmpty';
 import { Button } from '../../components/Button';
 
 import { Container } from './styles';
+import { Loading } from '../../components/Loading';
+import { isLoading } from 'expo-font';
 export function Groups() {
 
   const [groups, setGroups] = useState<string[]>([])
+  const [isLoading, setIsLoading] = useState(false)
   const navigation = useNavigation()
 
   function handleNewGroup() {
@@ -21,10 +24,18 @@ export function Groups() {
 
   async function fetchGroups() {
     try {
+
+      setIsLoading(true)
+
       const data = await groupsGetAll()
+
       setGroups(data)
+      
     } catch (error) {
       console.log(error)
+    }finally{
+      setIsLoading(false)
+
     }
   }
 
@@ -41,6 +52,8 @@ export function Groups() {
       <Header />
       <Highlight title='Turmas' subtitle='Jogue com a sua turma' />
 
+      {
+        isLoading ? <Loading/> :
       <FlatList
         data={groups}
         keyExtractor={item => item}
@@ -54,6 +67,8 @@ export function Groups() {
         ListEmptyComponent={() => <ListEmpty message="Que tal cadastrar a primeira turma ?" />}
         showsVerticalScrollIndicator={false}
       />
+    }
+
       <Button
         title='Criar nova turma'
         onPress={handleNewGroup}
